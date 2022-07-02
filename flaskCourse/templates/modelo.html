@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+      {# comentario #}
+
+      {{6 + 8}}
+      {{x, b}}
+
+      {% if x == 'aaa' %}
+        <p> Ola </p>
+
+      {% else %}
+
+        <p>I rapaz... </p>
+
+      {% endif %}
+
+
+
+      <table>
+        {% for k in range(1,100000000,1) %}
+            <tr>
+              <th> {{ k }} </th>
+            </tr>
+        {% endfor %}
+      </table>
+  </body>
+</html>

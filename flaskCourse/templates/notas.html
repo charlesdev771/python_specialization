@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Notas</title>
+  </head>
+  <body>
+
+    <h1>Boletim escolar</h1>
+
+    <form action="http://127.0.0.1:5000/calculo" method="post">
+
+      {% for x in range(4) %}
+
+      <<input type="number" name="numero" value="" id=nota{{x}} placeholder="Nota {{x}} "requerid>
+
+      {% endfor %}
+
+      <p>
+        <<button type="submit" name="button">aaaaaaaaaa</button>
+      </p>
+
+    </form>
+
+
+
+  </body>
+</html>
