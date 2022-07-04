@@ -1,18 +1,37 @@
-from flask import Flask, redirect, url_for, request, abort
-
+from flask import Flask, redirect, url_for, request, abort, make_response, session
+import os
+from werkzeug.utils import secure_filename
 from flask import render_template
 from json import dumps
 
 #static_folder='public'
 app = Flask(__name__, template_folder='templates')
 
-@app.route('/')
-def index():
-    x = 'aaa'
-    b = 'Jaaj'
-    query = request.args.to_dict()
-    return render_template("modelo.html", x = x, b = b, query=query)
+app.secret_key = '777'
 
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    return render_template('index.html')
+
+@app.route('/indexMain', methods=['GET', 'POST'])
+def indexMain():
+    username = None
+    if 'username' in session:
+        username = session['username']
+    return render_template('loginNovo.html', username=username)
+
+@app.route('/loginNovo', methods=['GET', 'POST'])
+def loginNovo():
+    if request.method == 'POST' and request.form['username' != '']:
+        session[username] = request.form['username']
+        return redirect(url_for('indexMain'))
+    return render_template('')
+
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('index'))
 
 @app.route('/notas')
 def notas():
@@ -80,6 +99,47 @@ def login():
             abort(401)
     else:
         abort(403)
+
+@app.route('/cookie', methods=['GET', 'POST'])
+def cookie():
+    return  render_template('cookie.html')
+
+@app.route('/setcookie', methods=['GET', 'POST'])
+def setcookie():
+    if request.method == 'POST':
+        data = request.form['c']
+        print(data)
+
+    resp = make_response(render_template('setcookie.html'))
+    resp.set_cookie('testecookie', data)
+    return resp
+
+@app.route('/getcookie', methods=['GET', 'POST'])
+def getcookie():
+    cookieName = request.cookie.get('testecookie')
+    return '<h1> cookie {} </h1>'.format(cookieName)
+
+
+@app.route('/uploadSite', methods=['GET', 'POST'])
+def uploadSite():
+    return render_template('upload.html')
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    file = request.files['imagem']
+    savePath = os.path.join(UPLOAD_FOLDER, secure_filename(file.filename))
+    file.save(savePath)
+    return 'Upload feito :)'
+
+
+
+
+
+
+UPLOAD_FOLDER = os.path.join(os.getcwd(), 'upload')
+
+
+
+
 
 
 

@@ -1,0 +1,24 @@
+<<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login novo</title>
+  </head>
+  <body>
+
+
+    {% if username != None %}
+
+      <p> Logado {{username}}</p>
+
+      <p><a href="/logout">Logout</a></p>
+
+    {% else %}
+    <p> Nao Logado {{username}}</p>
+    <p> <a href="/loginNovo">Login</a></p>
+
+    {% endif %}
+
+
+  </body>
+</html>
