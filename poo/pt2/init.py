@@ -25,3 +25,38 @@ class Machine:
     @property
     def nameMachine(self):
         return self.__nameMachine
+
+###########################################
+
+class People:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def speak():
+        print('aa')
+
+#class Student(People):
+#    def speak(self, aa):
+#        super().speak()
+#        print('bb')
+
+
+#################################
+
+
+class erroError(Exception):
+
+    def teste():
+        raise erroError(': ()')
+
+class Magic:
+
+    def __new__(self, *args, **kwargs):
+        pass
+
+    def __init__(self):
+        print('aa')
+
+print(a = Magic())
